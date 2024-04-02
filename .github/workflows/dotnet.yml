@@ -23,12 +23,12 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore -c Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
       
     - name: Pack BiUM.Core
-      run: dotnet pack ./src/BiUM.Core/BiUM.Core.csproj --no-build -o nupkg
+      run: dotnet pack ./src/BiUM.Core/BiUM.Core.csproj --no-build -c Release -o nupkg
 
     - name: Upload BiUM.Core Artifact
       uses: actions/upload-artifact@v3
@@ -40,7 +40,7 @@ jobs:
       run: dotnet nuget push ./src/BiUM.Core/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/FOA-FunctiOnAir/index.json" -k ${{ secrets.GITHUB_TOKEN }}
 
     - name: Pack BiUM.Infrastructure
-      run: dotnet pack ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj --no-build -o nupkg
+      run: dotnet pack ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj --no-build -c Release -o nupkg
 
     - name: Upload BiUM.Infrastructure Artifact
       uses: actions/upload-artifact@v3
