@@ -39,7 +39,7 @@ jobs:
         path: ./src/BiUM.Core/bin/Release/*.nupkg
 
     - name: Publish BiUM.Core
-      run: dotnet nuget push ./src/BiUM.Core/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/FOA-FunctiOnAir/index.json" -k ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push ./src/BiUM.Core/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/FOA-FunctiOnAir/index.json" -k ${{ secrets.SECRET_KEY }}
 
     - name: Pack BiUM.Infrastructure
       run: dotnet pack ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj --no-build -c Release -o nupkg
@@ -51,4 +51,4 @@ jobs:
         path: ./src/BiUM.Infrastructure/bin/Release/*.nupkg
 
     - name: Publish BiUM.Infrastructure
-      run: dotnet nuget push ./src/BiUM.Infrastructure/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/FOA-FunctiOnAir/index.json" -k ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push ./src/BiUM.Infrastructure/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/FOA-FunctiOnAir/index.json" -k ${{ secrets.SECRET_KEY }}
