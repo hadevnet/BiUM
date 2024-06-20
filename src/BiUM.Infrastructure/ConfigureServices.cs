@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ConfigureServices
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddBiUMInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         // Add Redis Options
         // services.AddOptions<RedisClientOptions>()

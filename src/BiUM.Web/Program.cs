@@ -1,8 +1,10 @@
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 {
     // Add services to the container.
-    builder.Services.AddApplicationServices();
-    builder.Services.AddInfrastructureServices(builder.Configuration);
+    builder.Services.AddBiUMApplicationServices(Assembly.GetExecutingAssembly());
+    builder.Services.AddBiUMInfrastructureServices(builder.Configuration);
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
