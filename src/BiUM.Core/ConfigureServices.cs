@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ConfigureServices
 {
-    public static IServiceCollection AddBiUMApplicationServices(this IServiceCollection services, Assembly assembly)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services, Assembly assembly)
     {
         services.AddAutoMapper(assembly);
         services.AddValidatorsFromAssembly(assembly);
