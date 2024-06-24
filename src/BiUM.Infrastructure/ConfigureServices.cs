@@ -49,6 +49,8 @@ public static class ConfigureServices
                               });
         });
 
+        services.AddHealthChecks();
+
         services.AddControllers();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

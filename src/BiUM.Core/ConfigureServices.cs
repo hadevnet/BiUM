@@ -4,7 +4,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ConfigureServices
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services, Assembly assembly)
+    public static IServiceCollection AddCoreServices(this IServiceCollection services, Assembly assembly)
     {
         return services;
     }

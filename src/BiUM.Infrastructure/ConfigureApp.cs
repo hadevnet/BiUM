@@ -10,7 +10,7 @@ public static class ConfigureApp
         var BiAppOrigins = "BiAppOrigins";
 
         // Configure Serilog logging
-        app.UseSerilogRequestLogging();
+        //app.UseSerilogRequestLogging();
         //app.UseSerilogExceptionHandler();
 
         app.UseCors(BiAppOrigins);

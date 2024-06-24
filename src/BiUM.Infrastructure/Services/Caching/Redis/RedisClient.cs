@@ -287,8 +287,9 @@ public class RedisClient : IRedisClient
             _scriptsLoaded = true;
         }
     }
+
     public void Dispose()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
