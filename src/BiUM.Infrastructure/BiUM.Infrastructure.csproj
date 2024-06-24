@@ -24,7 +24,7 @@
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>BiUM.Infrastructure</PackageId>
-    <Version>1.0.5</Version>
-    <Authors>Haafi</Authors>
+    <Version>1.0.6</Version>
+    <Authors>FunctiOnAir</Authors>
   </PropertyGroup>
 </Project>

@@ -1,4 +1,5 @@
 using BiUM.Core.Models.Caching.Redis;
+
 namespace BiUM.Core.Caching.Redis;
 
 public interface IRedisClient : IDisposable

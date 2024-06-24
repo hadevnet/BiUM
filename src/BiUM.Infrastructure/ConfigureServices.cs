@@ -1,12 +1,4 @@
-﻿using System.Reflection;
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-
-using BiUM.Core.Authorization;
+﻿using BiUM.Core.Authorization;
 using BiUM.Core.Caching.Redis;
 using BiUM.Core.Logging.Serilog;
 using BiUM.Core.MessageBroker.RabbitMQ;
@@ -17,12 +9,15 @@ using BiUM.Infrastructure.Services.Authorization;
 using BiUM.Infrastructure.Services.Caching.Redis;
 using BiUM.Infrastructure.Services.Logging.Serilog;
 using BiUM.Infrastructure.Services.MessageBroker.RabbitMQ;
-
 using FluentValidation;
-
 using MediatR;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
