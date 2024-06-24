@@ -3,7 +3,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddCoreServices(Assembly.GetExecutingAssembly());
-    builder.Services.AddInfrastructureServices(builder.Configuration, Assembly.GetExecutingAssembly());
+    builder.Services.AddInfrastructureServices(builder.Configuration);
 }
 
 var app = builder.Build();
