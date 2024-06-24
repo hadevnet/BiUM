@@ -64,9 +64,14 @@ public static class ConfigureServices
         });
 
         // Add Redis Options
+        services.AddOptions<RedisClientOptions>()
+            .Configure<IConfiguration>((options, configuration) =>
+            {
+                configuration.GetSection(RedisClientOptions.Name).Bind(options);
+            });
         services.AddDistributedMemoryCache(options =>
         {
-            configuration.GetSection("RedisClientOptions").Bind(options);
+            configuration.GetSection(RedisClientOptions.Name).Bind(options);
         });
         services.AddScoped<IRedisClient, RedisClient>();
 
@@ -74,7 +79,7 @@ public static class ConfigureServices
         services.AddOptions<RabbitMQOptions>()
             .Configure<IConfiguration>((options, configuration) =>
             {
-                configuration.GetSection("RabbitMQOptions").Bind(options);
+                configuration.GetSection(RabbitMQOptions.Name).Bind(options);
             });
         services.AddScoped<IRabbitMQClient, RabbitMQClient>();
 
