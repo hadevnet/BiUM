@@ -23,7 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ConfigureServices
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration, Assembly assembly)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         var BiAppOrigins = "BiAppOrigins";
 
@@ -90,10 +90,6 @@ public static class ConfigureServices
 
         services.AddScoped<EntitySaveChangesInterceptor>();
 
-        services.AddAutoMapper(assembly);
-        services.AddValidatorsFromAssembly(assembly);
-        services.AddMediatR(assembly);
-
         services.AddTransient<IDateTimeService, DateTimeService>();
         services.AddTransient<ICurrentUserService, CurrentUserService>();
 
@@ -101,6 +97,15 @@ public static class ConfigureServices
 
         services.AddAuthorizationBuilder()
             .AddPolicy("CanPurge", policy => policy.RequireRole("Administrator"));
+
+        return services;
+    }
+
+    public static IServiceCollection AddInfrastructureAdditionalServices(this IServiceCollection services, IConfiguration configuration, Assembly assembly)
+    {
+        services.AddAutoMapper(assembly);
+        services.AddValidatorsFromAssembly(assembly);
+        services.AddMediatR(assembly);
 
         return services;
     }

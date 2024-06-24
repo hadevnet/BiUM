@@ -4,9 +4,9 @@ namespace BiUM.Core.Mapping;
 
 public class MappingProfile : AutoMapper.Profile
 {
-    public MappingProfile()
+    public MappingProfile(Assembly assembly)
     {
-        ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+        ApplyMappingsFromAssembly(assembly);
     }
 
     private void ApplyMappingsFromAssembly(Assembly assembly)

@@ -18,7 +18,7 @@
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>BiUM.Core</PackageId>
-    <Version>1.0.8</Version>
+    <Version>1.0.9</Version>
     <Authors>FunctiOnAir</Authors>
   </PropertyGroup>
 </Project>
