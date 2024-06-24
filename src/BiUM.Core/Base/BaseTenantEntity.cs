@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BiUM.Core.Common;
+namespace BiUM.Core.Base;
 
 public class BaseTenantEntity : BaseEntity
 {

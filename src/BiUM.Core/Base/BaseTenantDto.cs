@@ -1,4 +1,4 @@
-namespace BiUM.Core.Common;
+namespace BiUM.Core.Base;
 
 public class BaseTenantDto : BaseDto
 {

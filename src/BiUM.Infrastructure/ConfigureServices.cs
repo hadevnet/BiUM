@@ -1,41 +1,81 @@
-﻿using BiUM.Core.Caching.Redis;
+﻿using System.Reflection;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+
+using BiUM.Core.Authorization;
+using BiUM.Core.Caching.Redis;
 using BiUM.Core.Logging.Serilog;
 using BiUM.Core.MessageBroker.RabbitMQ;
+using BiUM.Core.Services;
+using BiUM.Infrastructure.Interceptors;
+using BiUM.Infrastructure.Services;
+using BiUM.Infrastructure.Services.Authorization;
 using BiUM.Infrastructure.Services.Caching.Redis;
 using BiUM.Infrastructure.Services.Logging.Serilog;
 using BiUM.Infrastructure.Services.MessageBroker.RabbitMQ;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Serilog;
 
+using FluentValidation;
+
+using MediatR;
+
+using Serilog;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ConfigureServices
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration, Assembly assembly)
     {
+        var BiAppOrigins = "BiAppOrigins";
+
+        services.AddHttpContextAccessor();
+
+        services.AddControllersWithViews();
+
+        services.AddRazorPages();
+
+        // Customise default API behaviour
+        services.Configure<ApiBehaviorOptions>(options =>
+            options.SuppressModelStateInvalidFilter = true);
+
+        services.AddCors(options =>
+        {
+            options.AddPolicy(name: BiAppOrigins,
+                              policy =>
+                              {
+                                  policy
+                                    .WithOrigins("http://localhost:3000")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod(); ;
+                              });
+        });
+
+        services.AddControllers();
+
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+        });
+
         // Add Redis Options
-        // services.AddOptions<RedisClientOptions>()
-        // .Configure<IConfiguration>((options, configuration) =>
-        // {
-        //     configuration.GetSection("RedisClientOptions").Bind(options);
-        // });
-
-        // services.AddScoped(sp => sp.GetRequiredService<IOptions<RedisClientOptions>>().Value);
-
-        services.AddDistributedMemoryCache(options => {
+        services.AddDistributedMemoryCache(options =>
+        {
             configuration.GetSection("RedisClientOptions").Bind(options);
         });
         services.AddScoped<IRedisClient, RedisClient>();
 
         // Add RabbitMQ Options
         services.AddOptions<RabbitMQOptions>()
-        .Configure<IConfiguration>((options, configuration) =>
-        {
-            configuration.GetSection("RabbitMQOptions").Bind(options);
-        });
+            .Configure<IConfiguration>((options, configuration) =>
+            {
+                configuration.GetSection("RabbitMQOptions").Bind(options);
+            });
         services.AddScoped<IRabbitMQClient, RabbitMQClient>();
 
         // Add Serilog logging
@@ -46,6 +86,19 @@ public static class ConfigureServices
         });
         services.AddScoped<ISerilogClient, SerilogClient>();
 
+        services.AddScoped<EntitySaveChangesInterceptor>();
+
+        services.AddAutoMapper(assembly);
+        services.AddValidatorsFromAssembly(assembly);
+        services.AddMediatR(assembly);
+
+        services.AddTransient<IDateTimeService, DateTimeService>();
+        services.AddTransient<ICurrentUserService, CurrentUserService>();
+
+        services.AddAuthentication();
+
+        services.AddAuthorizationBuilder()
+            .AddPolicy("CanPurge", policy => policy.RequireRole("Administrator"));
 
         return services;
     }

@@ -1,6 +1,8 @@
 namespace BiUM.Infrastructure.Services.MessageBroker.RabbitMQ;
+
 public class RabbitMQOptions
 {
+    public bool Enable { get; set; }
     public string? Hostname { get; set; }
     public int? Port { get; set; }
     public string? VirtualHost { get; set; }
