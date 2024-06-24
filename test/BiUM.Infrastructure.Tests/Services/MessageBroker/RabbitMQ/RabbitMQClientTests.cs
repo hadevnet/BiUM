@@ -18,6 +18,7 @@ public class RabbitMQClientTests
         // Replace with your own configuration values
         var options = new RabbitMQOptions
         {
+            Enable = true,
             //// Azure
             Hostname = "38.242.253.6",
             Port = 30673,
