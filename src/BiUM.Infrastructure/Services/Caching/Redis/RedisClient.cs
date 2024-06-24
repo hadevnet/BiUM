@@ -16,16 +16,20 @@ public class RedisClient : IRedisClient
     private readonly RedisClientOptions _options;
     private readonly TimeSpan? _defaultCacheTimeout;
 
-    public RedisClient(RedisClientOptions redisClientOptions)
+    public RedisClient()
     {
-        _options = redisClientOptions;
+    }
 
-        if (!_options.Enable)
+    public RedisClient(RedisClientOptions? redisClientOptions)
+    {
+        if (redisClientOptions == null || !redisClientOptions.Enable)
         {
             // throw new InvalidOperationException("Redis caching is not enabled.");
 
             return;
         }
+
+        _options = redisClientOptions;
 
         _database = _options.ConnectionMultiplexer.GetDatabase();
         _defaultCacheTimeout = _options.DefaultCacheTimeout;

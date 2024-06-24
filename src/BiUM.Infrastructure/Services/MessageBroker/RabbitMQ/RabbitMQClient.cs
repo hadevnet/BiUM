@@ -15,6 +15,10 @@ public partial class RabbitMQClient : IRabbitMQClient
     private readonly IConnection? _connection;
     private readonly IModel? _channel;
 
+    public RabbitMQClient()
+    {
+    }
+
     public RabbitMQClient(RabbitMQOptions options)
     {
         _options = options;
