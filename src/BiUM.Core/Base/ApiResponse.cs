@@ -30,7 +30,19 @@ public class ApiResponse<T> : IApiResponse
         _messages.AddRange(messages);
     }
 
-    public void AddMessage(string apiName, string errorCode, string errorMessage, bool friendly, bool critical, MessageSeverity severity)
+    public void AddMessage(string errorCode, string errorMessage, MessageSeverity? severity)
+    {
+        _messages.Add(new ResponseMessage
+        {
+            ApiName = "",
+            ErrorCode = errorCode,
+            ErrorMessage = errorMessage,
+            Friendly = false,
+            Severity = severity ?? MessageSeverity.Error
+        });
+    }
+
+    public void AddMessage(string apiName, string errorCode, string errorMessage, bool friendly, MessageSeverity severity)
     {
         _messages.Add(new ResponseMessage
         {
@@ -38,7 +50,6 @@ public class ApiResponse<T> : IApiResponse
             ErrorCode = errorCode,
             ErrorMessage = errorMessage,
             Friendly = friendly,
-            Critical = critical,
             Severity = severity
         });
     }
