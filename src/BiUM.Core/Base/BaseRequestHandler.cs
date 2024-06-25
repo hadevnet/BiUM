@@ -16,6 +16,12 @@ public interface ICommandHandler<TCommand> : IRequestHandler<TCommand, ApiEmptyR
     new Task<ApiEmptyResponse> Handle(TCommand command, CancellationToken cancellationToken);
 }
 
+public interface ICommandResponseHandler<TCommand, TType> : IRequestHandler<TCommand, ApiResponse<TType>>, IBaseRequestHandler<TCommand, TType>
+    where TCommand : IRequest<ApiResponse<TType>>
+{
+    new Task<ApiResponse<TType>> Handle(TCommand command, CancellationToken cancellationToken);
+}
+
 public interface IQueryHandler<TQuery, TType> : IRequestHandler<TQuery, ApiResponse<TType>>, IBaseRequestHandler<TQuery, TType>
     where TQuery : IRequest<ApiResponse<TType>>
 {
