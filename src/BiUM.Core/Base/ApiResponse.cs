@@ -1,9 +1,7 @@
 namespace BiUM.Core.Base;
 
-public class ApiResponse<T> : IApiResponse
+public class ApiEmptyResponse : IApiResponse
 {
-    public T? Value { get; set; }
-
     public virtual bool Success
     {
         get
@@ -53,4 +51,9 @@ public class ApiResponse<T> : IApiResponse
             Severity = severity
         });
     }
+}
+
+public class ApiResponse<T> : ApiEmptyResponse
+{
+    public T? Value { get; set; }
 }

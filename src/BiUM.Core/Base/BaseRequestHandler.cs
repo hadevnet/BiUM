@@ -2,14 +2,18 @@ using MediatR;
 
 namespace BiUM.Core.Base;
 
-public interface IBaseRequestHandler<TRequest, TType>
+public interface IBaseRequestHandler<TRequest>
 {
 }
 
-public interface ICommandHandler<TCommand, TType> : IRequestHandler<TCommand, ApiResponse<TType>>, IBaseRequestHandler<TCommand, TType>
-    where TCommand : IRequest<ApiResponse<TType>>
+public interface IBaseRequestHandler<TRequest, TType> : IBaseRequestHandler<TRequest>
 {
-    new Task<ApiResponse<TType>> Handle(TCommand command, CancellationToken cancellationToken);
+}
+
+public interface ICommandHandler<TCommand> : IRequestHandler<TCommand, ApiEmptyResponse>, IBaseRequestHandler<TCommand>
+    where TCommand : IRequest<ApiEmptyResponse>
+{
+    new Task<ApiEmptyResponse> Handle(TCommand command, CancellationToken cancellationToken);
 }
 
 public interface IQueryHandler<TQuery, TType> : IRequestHandler<TQuery, ApiResponse<TType>>, IBaseRequestHandler<TQuery, TType>
