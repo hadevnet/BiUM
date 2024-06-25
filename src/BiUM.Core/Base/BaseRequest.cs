@@ -17,6 +17,15 @@ public record BaseCommandTenantDto : BaseCommandDto
     public Guid? TenantId { get; set; }
 }
 
+public record BaseCommandResponseDto<TType> : BaseRequestDto<ApiResponse<TType>>
+{
+}
+
+public record BaseCommandTenantResponseDto<TType> : BaseCommandResponseDto<TType>
+{
+    public Guid? TenantId { get; set; }
+}
+
 public record BaseQueryDto<TType> : BaseRequestDto<ApiResponse<TType>>
 {
     public Guid? Id { get; set; }
