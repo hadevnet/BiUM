@@ -25,12 +25,14 @@ public static class ConfigureServices
 
         // services.AddScoped(sp => sp.GetRequiredService<IOptions<RedisClientOptions>>().Value);
 
+        services.Configure<RedisClientOptions>(configuration.GetSection("RedisClientOptions"));
         services.AddDistributedMemoryCache(options => {
             configuration.GetSection("RedisClientOptions").Bind(options);
         });
         services.AddScoped<IRedisClient, RedisClient>();
 
         // Add RabbitMQ Options
+        services.Configure<RabbitMQOptions>(configuration.GetSection("RabbitMQOptions"));
         services.AddOptions<RabbitMQOptions>()
         .Configure<IConfiguration>((options, configuration) =>
         {

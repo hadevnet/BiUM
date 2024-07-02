@@ -1,4 +1,4 @@
-namespace BiUM.Web;
+namespace BiUM.UseCases;
 
 public class WeatherForecast
 {

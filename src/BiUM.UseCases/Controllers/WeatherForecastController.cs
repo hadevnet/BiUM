@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BiUM.Web.Controllers;
+namespace BiUM.UseCases.Controllers;
 
 [ApiController]
 [Route("[controller]")]

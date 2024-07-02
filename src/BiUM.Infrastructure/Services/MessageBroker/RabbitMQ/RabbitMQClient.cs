@@ -63,4 +63,9 @@ public partial class RabbitMQClient : IRabbitMQClient
 
         return tcs.Task.Result;
     }
+
+    public void Dispose()
+    {
+        _channel.Dispose();
+    }
 }

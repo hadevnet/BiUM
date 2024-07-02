@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="..\BiUM.Core\BiUM.Core.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
   <ItemGroup>
-    <!-- <PackageReference Include="BiUM.Application" Version="1.0.1" /> -->
+    <PackageReference Include="BiUM.Core" Version="1.0.0" />
 
     <PackageReference Include="StackExchange.Redis" Version="2.6.90" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />

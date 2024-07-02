@@ -7,4 +7,5 @@ public interface IRabbitMQClient
 {
     void SendMessage(Message message, string exchangeName = "", string queueName = "", bool persistent = false);
     Task<Message> ReceiveMessageAsync(string queueName = "");
+    void Dispose();
 }

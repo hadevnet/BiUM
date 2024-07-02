@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0FC25CA0-5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiUM.Infrastructure.Tests", "test\BiUM.Infrastructure.Tests\BiUM.Infrastructure.Tests.csproj", "{98BB316C-EC45-4214-BB2B-BF8CBE668130}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiUM.Web", "src\BiUM.Web\BiUM.Web.csproj", "{BAA46E60-B1D5-4972-B9B6-7C3638B230C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiUM.UseCases", "src\BiUM.UseCases\BiUM.UseCases.csproj", "{BAA46E60-B1D5-4972-B9B6-7C3638B230C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
