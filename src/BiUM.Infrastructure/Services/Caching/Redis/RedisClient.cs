@@ -12,21 +12,28 @@ public class RedisClient : IRedisClient
     private LoadedLuaScript? _removeIfEqual;
     private LoadedLuaScript? _replaceIfEqual;
 
-    private readonly IDatabase _database;
+    private readonly IDatabase? _database;
     private readonly RedisClientOptions _options;
     private readonly TimeSpan? _defaultCacheTimeout;
 
-    public RedisClient(RedisClientOptions redisClientOptions)
+    public RedisClient()
     {
-        if (!redisClientOptions.Enable)
+    }
+
+    public RedisClient(RedisClientOptions? redisClientOptions)
+    {
+        if (redisClientOptions == null || !redisClientOptions.Enable)
         {
-            throw new InvalidOperationException("Redis caching is not enabled.");
+            // throw new InvalidOperationException("Redis caching is not enabled.");
+
+            return;
         }
 
-        _database = redisClientOptions.ConnectionMultiplexer.GetDatabase();
-        _defaultCacheTimeout = redisClientOptions.DefaultCacheTimeout;
-
         _options = redisClientOptions;
+
+        _database = _options.ConnectionMultiplexer.GetDatabase();
+        _defaultCacheTimeout = _options.DefaultCacheTimeout;
+
     }
     /// <summary>
     /// The GetAsync method retrieves a cache item with a specific key from Redis database asynchronously.
@@ -280,8 +287,9 @@ public class RedisClient : IRedisClient
             _scriptsLoaded = true;
         }
     }
+
     public void Dispose()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }

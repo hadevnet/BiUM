@@ -4,7 +4,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ConfigureApp
 {
-    public static IApplicationBuilder AddApplicationApps(this IApplicationBuilder app)
+    public static IApplicationBuilder AddCoreApps(this IApplicationBuilder app)
     {
         app.UseMiddleware<PerformanceMiddleware>();
 

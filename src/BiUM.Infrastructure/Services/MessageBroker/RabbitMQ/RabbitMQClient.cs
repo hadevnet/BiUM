@@ -1,23 +1,35 @@
-using System;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using BiUM.Core.Models.MessageBroker.RabbitMQ;
+
 using BiUM.Core.MessageBroker.RabbitMQ;
-using Microsoft.Extensions.Options;
+using BiUM.Core.Models.MessageBroker.RabbitMQ;
+
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace BiUM.Infrastructure.Services.MessageBroker.RabbitMQ;
+
 public partial class RabbitMQClient : IRabbitMQClient
 {
     private readonly RabbitMQOptions _options;
-    private readonly IConnection _connection;
-    private readonly IModel _channel;
+    private readonly IConnection? _connection;
+    private readonly IModel? _channel;
+
+    public RabbitMQClient()
+    {
+    }
 
     public RabbitMQClient(RabbitMQOptions options)
     {
         _options = options;
+
+        if (!_options.Enable)
+        {
+            // throw new InvalidOperationException("RabbitMQ is not enabled.");
+
+            return;
+        }
+
         var factory = new ConnectionFactory
         {
             Uri = new Uri($"amqp://{options.UserName}:{options.Password}@{options.Hostname}:{options.Port}/{options.VirtualHost}")

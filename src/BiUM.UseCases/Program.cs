@@ -4,10 +4,11 @@ using BiUM.Infrastructure.Services.Caching.Redis;
 using BiUM.Infrastructure.Services.MessageBroker.RabbitMQ;
 using BiUM.UseCases.RabbitMQ;
 
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 {
-    // Add services to the container.
-    builder.Services.AddApplicationServices();
+    builder.Services.AddCoreServices(Assembly.GetExecutingAssembly());
     builder.Services.AddInfrastructureServices(builder.Configuration);
 
     builder.Services.AddControllers();
@@ -24,15 +25,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
+    app.AddCoreApps();
+    app.AddInfrastructureApps();
+
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        app.UseHsts();
     }
 
-    app.UseHttpsRedirection();
-    app.UseAuthorization();
-    app.MapControllers();
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller}/{action=Index}/{id?}");
+
+    app.MapRazorPages();
+
+    app.MapFallbackToFile("index.html");
+
     app.Run();
 }
