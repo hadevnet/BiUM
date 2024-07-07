@@ -40,13 +40,13 @@ public static class ConfigureServices
         services.AddCors(options =>
         {
             options.AddPolicy(name: BiAppOrigins,
-                              policy =>
-                              {
-                                  policy
-                                    .WithOrigins("http://localhost:3000")
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod(); ;
-                              });
+                policy =>
+                {
+                    policy
+                    .WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
         });
 
         services.AddHealthChecks();

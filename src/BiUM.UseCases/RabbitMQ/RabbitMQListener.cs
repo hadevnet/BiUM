@@ -1,14 +1,14 @@
 using BiUM.Core.Logging.Serilog;
-using BiUM.Infrastructure.Services.MessageBroker.RabbitMQ;
+using BiUM.Core.MessageBroker.RabbitMQ;
 
 namespace BiUM.UseCases.RabbitMQ;
 
 public class RabbitMQListener : BackgroundService
 {
-    private readonly RabbitMQClient _rabbitMQClient;
+    private readonly IRabbitMQClient _rabbitMQClient;
     private readonly ISerilogClient _serilogClient;
 
-    public RabbitMQListener(RabbitMQClient rabbitMQClient, ISerilogClient serilogClient)
+    public RabbitMQListener(IRabbitMQClient rabbitMQClient, ISerilogClient serilogClient)
     {
         _rabbitMQClient = rabbitMQClient;
         _serilogClient = serilogClient;
