@@ -2,8 +2,6 @@ using System.Security.Claims;
 
 using Microsoft.AspNetCore.Http;
 
-using BiUM.Core.Authorization;
-
 namespace BiUM.Infrastructure.Services.Authorization;
 
 public class CurrentUserService : ICurrentUserService
