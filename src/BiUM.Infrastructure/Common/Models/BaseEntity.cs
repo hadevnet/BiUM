@@ -14,7 +14,7 @@ public class BaseEntity : BaseAuditableEntity
     public TimeOnly? UpdatedTime { get; set; }
     public Guid? UpdatedBy { get; set; }
     public bool Test { get; set; } = false;
-    
+
     public BaseEntity() => Id = Guid.NewGuid();
 
     [NotMapped]

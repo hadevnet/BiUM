@@ -1,0 +1,19 @@
+﻿using BiUM.Specialized.Common.Utils;
+
+namespace BiUM.Specialized.Consts;
+
+public partial class Ids
+{
+    public static class Language
+    {
+        public static class Turkish
+        {
+            public static Guid Id = GuidGenerator.NewGuid("Language-Turkish");
+        }
+
+        public static class English
+        {
+            public static Guid Id = GuidGenerator.NewGuid("Language-English");
+        }
+    }
+}

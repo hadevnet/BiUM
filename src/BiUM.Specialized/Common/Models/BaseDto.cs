@@ -1,12 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+namespace BiUM.Specialized.Common.Models;
 
-namespace BiUM.Specialized.Common.ViewModels;
-
-public class BaseVm
+public class BaseDto
 {
-    [Required]
-    [Column("ID", Order = 1)]
     public Guid Id { get; set; }
     public bool Active { get; set; }
     public DateOnly Created { get; set; }

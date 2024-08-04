@@ -4,13 +4,18 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BiUM.Infrastructure.Persistence.Configs;
 
-public class BaseEntityConfig : IEntityTypeConfiguration<BaseEntity>
+public class TenantBaseEntityConfig : IEntityTypeConfiguration<TenantBaseEntity>
 {
-    public void Configure(EntityTypeBuilder<BaseEntity> b)
+    public void Configure(EntityTypeBuilder<TenantBaseEntity> b)
     {
         b.HasKey(x => x.Id);
         b.Property<Guid>(x => x.Id)
             .HasField("ID")
+            .HasColumnOrder(0);
+
+        b.Property(e => e.TenantId)
+            .IsRequired()
+            .HasColumnName("TENANT_ID")
             .HasColumnOrder(1);
 
         b.Property(e => e.Active)

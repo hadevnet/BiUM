@@ -1,6 +1,6 @@
 using BiUM.Specialized.Common.Enums;
 
-namespace BiUM.Specialized.Common.ViewModels;
+namespace BiUM.Specialized.Common.Models;
 
 public class ResponseMessage
 {
