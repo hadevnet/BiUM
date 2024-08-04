@@ -17,10 +17,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiUM.UseCases", "src\BiUM.U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{387DBA91-3887-409B-B808-3C968306F39F}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
 		Directory.Build.props = Directory.Build.props
+		nuget.config = nuget.config
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiUM.Specialized", "src\BiUM.Specialized\BiUM.Specialized.csproj", "{D9332084-22CD-4486-B28F-2E105CB037A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{091FCEB3-1774-4F0A-A23B-85C56D95E0D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{2ED3F689-5189-4C75-A5F5-CB9E2979823F}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,7 +67,10 @@ Global
 		{F8A571C7-74EA-4561-8064-DA95D5A5D3CD} = {E16174BF-8BC7-4BBC-A2C9-433C7556C8E3}
 		{7CE45BE1-EAAE-4D2C-9D92-2BD96B312C5C} = {E16174BF-8BC7-4BBC-A2C9-433C7556C8E3}
 		{98BB316C-EC45-4214-BB2B-BF8CBE668130} = {0FC25CA0-5C38-4158-BDC5-A9BF6FFD42B3}
-		{BAA46E60-B1D5-4972-B9B6-7C3638B230C7} = {E16174BF-8BC7-4BBC-A2C9-433C7556C8E3}
 		{D9332084-22CD-4486-B28F-2E105CB037A9} = {E16174BF-8BC7-4BBC-A2C9-433C7556C8E3}
+		{2ED3F689-5189-4C75-A5F5-CB9E2979823F} = {091FCEB3-1774-4F0A-A23B-85C56D95E0D8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7A50E6E-70A9-4501-A9DD-0AA129CA1B73}
 	EndGlobalSection
 EndGlobal
