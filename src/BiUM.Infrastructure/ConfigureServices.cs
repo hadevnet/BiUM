@@ -1,4 +1,5 @@
 ﻿using BiUM.Core.Caching.Redis;
+using BiUM.Core.Logging.Serilog;
 using BiUM.Core.MessageBroker.RabbitMQ;
 using BiUM.Infrastructure.Common.Configs;
 using BiUM.Infrastructure.Services;
@@ -58,11 +59,11 @@ public static class ConfigureServices
         //     }
         // }
 
-        services.AddLogging(loggingBuilder =>
-        {
-            loggingBuilder.ClearProviders();
-            loggingBuilder.AddSerilog(dispose: true);
-        });
+        //services.AddLogging(loggingBuilder =>
+        //{
+        //    loggingBuilder.ClearProviders();
+        //    loggingBuilder.AddSerilog(logger, dispose: true);
+        //});
 
         services.AddHealthChecks();
 
@@ -85,12 +86,12 @@ public static class ConfigureServices
         // services.AddScoped<IRabbitMQClient, RabbitMQClient>();
 
         // // Add Serilog logging
-        // services.AddLogging(loggingBuilder =>
-        // {
-        //     loggingBuilder.ClearProviders();
-        //     loggingBuilder.AddSerilog(dispose: true);
-        // });
-        // services.AddScoped<ISerilogClient, SerilogClient>();
+        services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.ClearProviders();
+            loggingBuilder.AddSerilog(dispose: true);
+        });
+        services.AddScoped<ISerilogClient, SerilogClient>();
 
         return services;
     }
