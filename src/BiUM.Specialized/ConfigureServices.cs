@@ -1,20 +1,11 @@
-﻿using BiUM.Core.Caching.Redis;
-using BiUM.Core.Logging.Serilog;
-using BiUM.Core.MessageBroker.RabbitMQ;
-using BiUM.Infrastructure.Common.Interceptors;
-using BiUM.Infrastructure.Services;
+﻿using BiUM.Infrastructure.Common.Interceptors;
+using BiUM.Infrastructure.Common.Services;
 using BiUM.Infrastructure.Services.Authorization;
-using BiUM.Infrastructure.Services.Caching.Redis;
-using BiUM.Infrastructure.Services.Logging.Serilog;
-using BiUM.Infrastructure.Services.MessageBroker.RabbitMQ;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Serilog;
 using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -58,8 +49,8 @@ public static class ConfigureServices
 
         services.AddScoped<EntitySaveChangesInterceptor>();
 
-        // services.AddTransient<IDateTimeService, DateTimeService>();
-        // services.AddTransient<ICurrentUserService, CurrentUserService>();
+        services.AddTransient<IDateTimeService, DateTimeService>();
+        services.AddTransient<ICurrentUserService, CurrentUserService>();
 
         services.AddAuthentication();
 
