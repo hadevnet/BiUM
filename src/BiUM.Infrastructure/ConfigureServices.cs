@@ -39,10 +39,11 @@ public static class ConfigureServices
         services.AddSingleton(specialized.RabbitMQOptions);
         services.AddSingleton<IRabbitMQClient, RabbitMQClient>();
 
+        // TODO: Serilog getting Exception
         // Configure Serilog
-        var logger = new LoggerConfiguration()
-            .MinimumLevel.Is(Enum.Parse<LogEventLevel>(specialized.SerilogOptions.MinimumLevel))
-            .CreateLogger();
+        //var logger = new LoggerConfiguration()
+        //    .MinimumLevel.Is(Enum.Parse<LogEventLevel>(specialized.SerilogOptions.MinimumLevel))
+        //    .CreateLogger();
 
 
         // foreach (var writeTo in specialized.SerilogOptions.WriteTo)
@@ -60,7 +61,7 @@ public static class ConfigureServices
         services.AddLogging(loggingBuilder =>
         {
             loggingBuilder.ClearProviders();
-            loggingBuilder.AddSerilog(logger, dispose: true);
+            loggingBuilder.AddSerilog(dispose: true);
         });
 
         services.AddHealthChecks();
