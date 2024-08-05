@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BiUM.Core\BiUM.Core.csproj" />
     <ProjectReference Include="..\BiUM.Infrastructure\BiUM.Infrastructure.csproj" />
+	  <ProjectReference Include="..\BiUM.Specialized\BiUM.Specialized.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddCoreServices(Assembly.GetExecutingAssembly());
     builder.Services.AddInfrastructureServices(builder.Configuration);
+    builder.Services.AddSpecializedServices(builder.Configuration);
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -21,12 +22,15 @@ var builder = WebApplication.CreateBuilder(args);
 
     // builder.Services.AddHostedService<RabbitMQHostedService>();
     // builder.Services.AddHostedService<RabbitMQListener>();
+
+    builder.Services.AddRazorPages();
 }
 
 var app = builder.Build();
 {
     app.AddCoreApps();
     app.AddInfrastructureApps();
+    app.AddSpecializedApps();
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
