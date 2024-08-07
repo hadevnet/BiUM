@@ -21,7 +21,7 @@ public interface IForValuesQueryHandler<TQuery, TType> : IRequestHandler<TQuery,
 }
 
 public interface IPaginatedForValuesQueryHandler<TQuery, TType> : IRequestHandler<TQuery, PaginatedApiResponse<TType>>, IBaseRequestHandler<TQuery, TType>
-    where TQuery : BasePaginatedQueryDto<TType>
+    where TQuery : BasePaginatedForValuesQueryDto<TType>
 {
     new Task<PaginatedApiResponse<TType>> Handle(TQuery query, CancellationToken cancellationToken);
 }

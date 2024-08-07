@@ -23,6 +23,11 @@ public record BaseForValuesQueryDto<TType> : BaseQuery<ApiResponse<IList<TType>>
     public IReadOnlyList<Guid>? Ids { get; set; }
 }
 
+public record BasePaginatedForValuesQueryDto<TType> : BasePaginatedQueryDto<TType>
+{
+    public IReadOnlyList<Guid>? Ids { get; set; }
+}
+
 public record BaseQueryTenantDto<TType> : BaseQueryDto<TType>
 {
     public Guid? TenantId { get; set; }
