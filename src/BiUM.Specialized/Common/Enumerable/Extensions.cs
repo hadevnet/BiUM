@@ -17,7 +17,7 @@ public static class Extensions
         return source.Where(x => x.Column.Equals(columnName)).ToList();
     }
 
-    public static string ToTranslationString(this IEnumerable<TranslationDto> source)
+    public static string ToTranslationString(this IEnumerable<BaseTranslationDto> source)
     {
         return source.FirstOrDefault()?.Translation ?? "";
     }
