@@ -1,4 +1,5 @@
-﻿using BiUM.Infrastructure.Common.Interceptors;
+﻿using AutoMapper.Internal;
+using BiUM.Infrastructure.Common.Interceptors;
 using BiUM.Infrastructure.Common.Services;
 using BiUM.Infrastructure.Services.Authorization;
 using FluentValidation;
@@ -62,7 +63,7 @@ public static class ConfigureServices
 
     public static IServiceCollection AddInfrastructureAdditionalServices(this IServiceCollection services, IConfiguration configuration, Assembly assembly)
     {
-        services.AddAutoMapper(assembly);
+        services.AddAutoMapper(cfg => cfg.Internal().MethodMappingEnabled = false, assembly);
         services.AddValidatorsFromAssembly(assembly);
         services.AddMediatR(assembly);
 
