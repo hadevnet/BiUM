@@ -4,7 +4,8 @@ namespace BiUM.Specialized.Common.Models;
 
 public static class Extensions
 {
-    public static TranslationBaseEntity ToTranslationEntity(this BaseTranslationDto translation, Guid recordId, string columnName)
+    public static TTranslationEntity ToTranslationEntity<TTranslationEntity>(this BaseTranslationDto translation, Guid recordId, string columnName)
+        where TTranslationEntity : TranslationBaseEntity, new()
     {
         return new()
         {

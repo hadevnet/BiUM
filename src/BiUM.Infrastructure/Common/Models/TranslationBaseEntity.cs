@@ -7,22 +7,22 @@ public class TranslationBaseEntity
 {
     [Required]
     [Column("ID", Order = 1)]
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
 
     [Required]
     [Column("RECORD_ID", Order = 2)]
-    public required Guid RecordId { get; set; }
+    public Guid RecordId { get; set; }
 
     [Required]
     [Column("COLUMN", Order = 3)]
-    public required string Column { get; set; }
+    public string Column { get; set; }
 
     [Required]
     [Column("LANGUAGE_ID", Order = 4)]
-    public required Guid LanguageId { get; set; }
+    public Guid LanguageId { get; set; }
 
     [Column("TRANSLATION", Order = 5)]
     public string? Translation { get; set; }
 
-    public Guid BaseTranslationEntity() => Id = Guid.NewGuid();
+    public TranslationBaseEntity() => Id = Guid.NewGuid();
 }
