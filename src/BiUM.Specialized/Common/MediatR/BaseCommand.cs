@@ -24,3 +24,15 @@ public record BaseCommandTenantResponseDto<TType> : BaseCommandResponseDto<TType
 {
     public Guid? TenantId { get; set; }
 }
+
+public record BaseImportCommandDto : BaseCommandDto
+{
+    public string Name { get; set; }
+    public string Content { get; set; }
+    public string MimeType { get; set; }
+}
+
+public record BaseImportCommandTenantDto : BaseImportCommandDto
+{
+    public Guid? TenantId { get; set; }
+}

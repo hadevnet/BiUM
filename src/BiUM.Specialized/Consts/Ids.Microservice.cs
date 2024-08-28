@@ -6,6 +6,11 @@ public partial class Ids
 {
     public static class Microservice
     {
+        public static class Accounting
+        {
+            public static Guid Id = GuidGenerator.NewGuid("Microservice-Accounting");
+        }
+
         public static class Accounts
         {
             public static Guid Id = GuidGenerator.NewGuid("Microservice-Accounts");
