@@ -23,9 +23,9 @@ public static class ExportHelper
         return response;
     }
 
-    public static TType? ImportObject<TType>(string data)
+    public static TType? ImportObject<TType>(string content)
     {
-        var base64EncodedBytes = Convert.FromBase64String(data);
+        var base64EncodedBytes = Convert.FromBase64String(content);
         var dataString = Encoding.UTF8.GetString(base64EncodedBytes);
         var dataDecrypt = EncryptionHelper.Decrypt(dataString);
         var dataOriginal = JsonSerializer.Deserialize<TType>(dataDecrypt);
