@@ -29,14 +29,21 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
       
-    - name: Pack BiUM.Core
-      run: dotnet pack ./src/BiUM.Core/BiUM.Core.csproj --no-build -c Release -o nupkg
+    - name: Pack Projects
+      run: |
+        dotnet pack ./src/BiUM.Core/BiUM.Core.csproj --no-build -c Release -o nupkg
+        dotnet pack ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj --no-build -c Release -o nupkg
+        dotnet pack ./src/BiUM.Specialized/BiUM.Specialized.csproj --no-build -c Release -o nupkg
 
-    - name: Upload BiUM.Core Artifact
+    - name: Upload Artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: BiUM.Core
-        path: ./src/BiUM.Core/bin/Release/*.nupkg
+        name: BiUM-Packages
+        path: ./nupkg/*.nupkg
 
-    - name: Publish BiUM.Core
-      run: dotnet nuget push ./src/BiUM.Core/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/FOA-FunctiOnAir/index.json" -k ${{ secrets.SECRET_KEY }}
+    - name: Publish Packages
+      run: |
+        for f in ./nupkg/*.nupkg
+        do
+          dotnet nuget push $f --source "https://nuget.pkg.github.com/FOA-FunctiOnAir/index.json" -k ${{ secrets.SECRET_KEY }}
+        done
