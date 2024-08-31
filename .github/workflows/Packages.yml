@@ -25,8 +25,9 @@ jobs:
 
     - name: Authenticate with GitHub Packages
       run: |
+        nuget sources remove -name github || true
         nuget sources add -name github -source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json -username ${GITHUB_REPOSITORY_OWNER} -password ${{ secrets.GITHUB_TOKEN }}
-
+        
     # Build and publish BiUM.Core
     - name: Build BiUM.Core
       run: dotnet build ./src/BiUM.Core/BiUM.Core.csproj -c Release
