@@ -30,15 +30,24 @@ jobs:
         
     # Build and publish BiUM.Core
     - name: Build BiUM.Core
-      run: dotnet build ./src/BiUM.Core/BiUM.Core.csproj -c Release
+      run: dotnet build ./src/BiUM.Core/BiUM.Core.csproj -c Release --source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json
     - name: Pack BiUM.Core
       run: dotnet pack ./src/BiUM.Core/BiUM.Core.csproj -c Release -o nupkg
     - name: Publish BiUM.Core
       run: dotnet nuget push ./src/BiUM.Core/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json" -k ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Clear NuGet cache
+      run: dotnet nuget locals all --clear
+
+    - name: Add GitHub Packages source
+      run: dotnet nuget add source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json --name github --username ${GITHUB_REPOSITORY_OWNER} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+    
+    - name: Wait for package propagation
+      run: sleep 30
+
     # Build and publish BiUM.Infrastructure
     - name: Build BiUM.Infrastructure
-      run: dotnet build ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj -c Release
+      run: dotnet build ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj -c Release --source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json
     - name: Pack BiUM.Infrastructure
       run: dotnet pack ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj -c Release -o nupkg
     - name: Publish BiUM.Infrastructure
@@ -46,7 +55,7 @@ jobs:
 
     # Build and publish BiUM.Specialized
     - name: Build BiUM.Specialized
-      run: dotnet build ./src/BiUM.Specialized/BiUM.Specialized.csproj -c Release
+      run: dotnet build ./src/BiUM.Specialized/BiUM.Specialized.csproj -c Release --source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json
     - name: Pack BiUM.Specialized
       run: dotnet pack ./src/BiUM.Specialized/BiUM.Specialized.csproj -c Release -o nupkg
     - name: Publish BiUM.Specialized
