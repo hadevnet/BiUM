@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
 
     steps:
     - uses: actions/checkout@v4
@@ -17,13 +20,20 @@ jobs:
       with:
         dotnet-version: 7.0.x
 
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+
+    - name: Authenticate with GitHub Packages
+      run: |
+        nuget sources add -name github -source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json -username ${GITHUB_REPOSITORY_OWNER} -password ${{ secrets.GITHUB_TOKEN }}
+
     # Build and publish BiUM.Core
     - name: Build BiUM.Core
       run: dotnet build ./src/BiUM.Core/BiUM.Core.csproj -c Release
     - name: Pack BiUM.Core
       run: dotnet pack ./src/BiUM.Core/BiUM.Core.csproj -c Release -o nupkg
     - name: Publish BiUM.Core
-      run: dotnet nuget push ./src/BiUM.Core/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/hadevnet/index.json" -k ${{ secrets.SECRET_KEY }}
+      run: dotnet nuget push ./src/BiUM.Core/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json" -k ${{ secrets.GITHUB_TOKEN }}
 
     # Build and publish BiUM.Infrastructure
     - name: Build BiUM.Infrastructure
@@ -31,7 +41,7 @@ jobs:
     - name: Pack BiUM.Infrastructure
       run: dotnet pack ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj -c Release -o nupkg
     - name: Publish BiUM.Infrastructure
-      run: dotnet nuget push ./src/BiUM.Infrastructure/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/hadevnet/index.json" -k ${{ secrets.SECRET_KEY }}
+      run: dotnet nuget push ./src/BiUM.Infrastructure/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json" -k ${{ secrets.GITHUB_TOKEN }}
 
     # Build and publish BiUM.Specialized
     - name: Build BiUM.Specialized
@@ -39,7 +49,7 @@ jobs:
     - name: Pack BiUM.Specialized
       run: dotnet pack ./src/BiUM.Specialized/BiUM.Specialized.csproj -c Release -o nupkg
     - name: Publish BiUM.Specialized
-      run: dotnet nuget push ./src/BiUM.Specialized/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/hadevnet/index.json" -k ${{ secrets.SECRET_KEY }}
+      run: dotnet nuget push ./src/BiUM.Specialized/bin/Release/*.nupkg --source "https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json" -k ${{ secrets.GITHUB_TOKEN }}
 
     # Restore dependencies after publishing internal packages
     - name: Restore dependencies
