@@ -30,7 +30,7 @@ jobs:
         
     # Build and publish BiUM.Core
     - name: Build BiUM.Core
-      run: dotnet build ./src/BiUM.Core/BiUM.Core.csproj -c Release --source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json
+      run: dotnet build ./src/BiUM.Core/BiUM.Core.csproj -c Release
     - name: Pack BiUM.Core
       run: dotnet pack ./src/BiUM.Core/BiUM.Core.csproj -c Release -o nupkg
     - name: Publish BiUM.Core
@@ -44,10 +44,10 @@ jobs:
     
     - name: Wait for package propagation
       run: sleep 30
-
+      
     # Build and publish BiUM.Infrastructure
     - name: Build BiUM.Infrastructure
-      run: dotnet build ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj -c Release --source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json
+      run: dotnet build ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj -c Release
     - name: Pack BiUM.Infrastructure
       run: dotnet pack ./src/BiUM.Infrastructure/BiUM.Infrastructure.csproj -c Release -o nupkg
     - name: Publish BiUM.Infrastructure
@@ -55,7 +55,7 @@ jobs:
 
     # Build and publish BiUM.Specialized
     - name: Build BiUM.Specialized
-      run: dotnet build ./src/BiUM.Specialized/BiUM.Specialized.csproj -c Release --source https://nuget.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/index.json
+      run: dotnet build ./src/BiUM.Specialized/BiUM.Specialized.csproj -c Release
     - name: Pack BiUM.Specialized
       run: dotnet pack ./src/BiUM.Specialized/BiUM.Specialized.csproj -c Release -o nupkg
     - name: Publish BiUM.Specialized
